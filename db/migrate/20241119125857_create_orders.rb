@@ -3,7 +3,7 @@
 class CreateOrders < ActiveRecord::Migration[8.0]
   def change
     create_table :orders do |t|
-      t.uuid :uuid, default: 'gen_random_uuid()', unique: true
+      t.text :uuid, null: false
       t.string :state
 
       t.timestamps

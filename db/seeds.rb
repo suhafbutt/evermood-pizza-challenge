@@ -11,7 +11,7 @@
 #   end
 
 OrderItem.destroy_all
-OderOffer.destroy_all
+OrderOffer.destroy_all
 Pizza.destroy_all
 PizzaSize.destroy_all
 Ingredient.destroy_all
@@ -49,7 +49,7 @@ OrderItem.create!(pizza_id: salami.id, pizza_size: small, add: [], remove: [], o
 OrderItem.create!(pizza_id: salami.id, pizza_size: small, add: [], remove: [], order: order3)
 OrderItem.create!(pizza_id: salami.id, pizza_size: small, add: ['Olives'], remove: [], order: order3)
 
-OderOffer.create!(order_id: order3.id, offer_id: promotion.id)
-OderOffer.create!(order_id: order3.id, offer_id: discount.id)
+OrderOffer.create!(order_id: order3.id, offer_id: promotion.id)
+OrderOffer.create!(order_id: order3.id, offer_id: discount.id)
 
 puts 'Seed data successfully added!'

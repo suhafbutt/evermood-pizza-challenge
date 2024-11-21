@@ -1,12 +1,31 @@
-<div id="<%= dom_id order %>">
-  <p>
-    <strong>Offer:</strong>
-    <%= order.offer_id %>
-  </p>
-
-  <p>
-    <strong>State:</strong>
-    <%= order.state %>
-  </p>
-
-</div>
+<%= turbo_frame_tag dom_id(order) do %>
+  <div id="<%= dom_id(order) %>">
+    <div class="order-left">
+      <p>Order ID: <%= order.uuid %></p>
+      <p>Created At: <%= order.created_at %></p>
+      <p>Promotions: <%= "#{order.promotions.pluck(:code).join(', ').presence || '-'}" %></p>
+      <p>Discounts: <%= "#{order.discounts.pluck(:code).join(', ').presence || '-'}" %></p>
+      <p>Total price: <%= order.amount %></p>
+    </div>
+    <div class="order-right">
+      <ul>
+        <% order.order_items.each do |item| %>
+          <li><%= item.pizza.name %> (<%= item.pizza_size.name %>)</li>
+          <% if item.add.present? %>
+            <ul>
+              <li>Add: <%= item.add.join(', ')%></li>
+            </ul>
+          <% end %>
+          <% if item.remove.present?%>
+            <ul>
+              <li>Remove: <%= item.remove.join(', ')%></li>
+            </ul>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+    
+    <%= button_to "Mark as Completed", order_path(order), method: :patch, data: { turbo_frame: dom_id(order), turbo_confirm: "Are you sure?" } %>
+    <hr>
+  </div>
+<% end %>

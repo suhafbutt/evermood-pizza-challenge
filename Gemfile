@@ -53,6 +53,9 @@ group :development, :test do
   gem 'dotenv-rails'
   gem 'robocop'
   gem 'rubocop-rails-omakase', require: false
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'pry'
 end
 
 group :development do

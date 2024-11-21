@@ -1,7 +1,7 @@
 .env
-log/development.log
+log/*
 public/.DS_Store
 app/views/orders/.DS_Store
-tmp/cache/
-tmp/.DS_Store
+tmp/*
 app/.DS_Store
+app/views/.DS_Store
