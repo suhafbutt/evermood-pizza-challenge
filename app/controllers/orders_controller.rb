@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
   before_action :set_order, only: %i[update]
 
   def index
-    @orders = Order.where(state: 'OPEN')
+    @orders = Order.open
   end
 
   def update

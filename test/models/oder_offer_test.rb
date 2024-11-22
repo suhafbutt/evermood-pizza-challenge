@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class OderOfferTest < ActiveSupport::TestCase
+class OrderOfferTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end

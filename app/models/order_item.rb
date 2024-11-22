@@ -20,6 +20,6 @@ class OrderItem < ApplicationRecord
 
   def add_on_price
     ingredents = Ingredient.where(name: add)
-    ingredents.map{|ingredent| ingredent.multiplier * pizza_size.multiplier}.sum
+    ingredents.map { |ingredent| ingredent.multiplier * pizza_size.multiplier }.sum
   end
 end

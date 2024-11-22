@@ -1,50 +1,53 @@
 # frozen_string_literal: true
 
-require 'test_helper'
+require 'rails_helper'
 
-class OrdersControllerTest < ActionDispatch::IntegrationTest
-  setup do
-    @order = orders(:one)
-  end
+RSpec.describe OrdersController, type: :controller do
+  let(:order) { create(:order, state: 'OPEN') }
 
-  test 'should get index' do
-    get orders_url
-    assert_response :success
-  end
-
-  test 'should get new' do
-    get new_order_url
-    assert_response :success
-  end
-
-  test 'should create order' do
-    assert_difference('Order.count') do
-      post orders_url, params: { order: { offer_id: @order.offer_id, state: @order.state } }
+  describe 'GET #index' do
+    before do
+      create_list(:order, 3, state: 'OPEN')
+      get :index
     end
 
-    assert_redirected_to order_url(Order.last)
-  end
-
-  test 'should show order' do
-    get order_url(@order)
-    assert_response :success
-  end
-
-  test 'should get edit' do
-    get edit_order_url(@order)
-    assert_response :success
-  end
-
-  test 'should update order' do
-    patch order_url(@order), params: { order: { offer_id: @order.offer_id, state: @order.state } }
-    assert_redirected_to order_url(@order)
-  end
-
-  test 'should destroy order' do
-    assert_difference('Order.count', -1) do
-      delete order_url(@order)
+    it 'assigns @orders with all orders in OPEN state' do
+      expect(assigns(:orders).count).to eq(3)
+      expect(assigns(:orders).all? { |order| order.state == 'OPEN' }).to be_truthy
     end
 
-    assert_redirected_to orders_url
+    it 'renders the index template' do
+      expect(response).to render_template(:index)
+    end
+  end
+
+  describe 'PATCH #update' do
+    context 'when the update is successful' do
+      before do
+        patch :update, params: { id: order.id }
+      end
+
+      it 'marks the order as completed' do
+        order.reload
+        expect(order.state).to eq('COMPLETED')
+      end
+
+      it 'redirects to the orders index with a success notice' do
+        expect(response).to redirect_to(orders_path)
+        expect(flash[:notice]).to eq('Order marked as completed.')
+      end
+    end
+
+    context 'when the update fails' do
+      before do
+        allow_any_instance_of(Order).to receive(:update).and_return(false)
+        patch :update, params: { id: order.id }
+      end
+
+      it 'renders the index template with unprocessable entity status' do
+        expect(response).to render_template(:index)
+        expect(response.status).to eq(422)
+      end
+    end
   end
 end

@@ -8,6 +8,8 @@ class Order < ApplicationRecord
 
   before_create :set_uuid
 
+  scope :open, -> { where(state: 'OPEN') }
+
   def amount
     ::Orders::AmountCalculator.new(self).total_amount
   end
