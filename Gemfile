@@ -50,7 +50,14 @@ group :development, :test do
   gem 'brakeman', require: false
 
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
+  gem 'dotenv-rails'
+  gem 'factory_bot_rails'
+  gem 'pry'
+  gem 'rails-controller-testing'
+  gem 'robocop'
+  gem 'rspec-rails'
   gem 'rubocop-rails-omakase', require: false
+  gem 'shoulda-matchers'
 end
 
 group :development do

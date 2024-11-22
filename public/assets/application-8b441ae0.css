@@ -8,18 +8,3 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
-
-
- .button_to {
-  width: 100%;
-  overflow: hidden;
- }
- .order-left {
-  width: 50%;
-  float: left;
- }  
-
- .order-right {
-  width: 50%;
-  float: right;
- }
