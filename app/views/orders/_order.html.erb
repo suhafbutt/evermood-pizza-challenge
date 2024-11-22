@@ -3,8 +3,8 @@
     <div class="order-left">
       <p>Order ID: <%= order.uuid %></p>
       <p>Created At: <%= order.created_at %></p>
-      <p>Promotions: <%= "#{order.promotions.pluck(:code).join(', ').presence || '-'}" %></p>
-      <p>Discounts: <%= "#{order.discounts.pluck(:code).join(', ').presence || '-'}" %></p>
+      <p>Promotions: <%= "#{ offer_codes(order.promotions) || '-'}" %></p>
+      <p>Discounts: <%= "#{ offer_codes(order.discounts) || '-'}" %></p>
       <p>Total price: <%= order.amount %></p>
     </div>
     <div class="order-right">
