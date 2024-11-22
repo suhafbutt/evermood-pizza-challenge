@@ -1,24 +1,9 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+It's been built using the latest Rails ruby version. You can do the following steps to run it on you machine:
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Install Latest ruby, rails and postgresql versions. (Check gem files)
+clone the project
+run migrations ( do not forget to add your database credentials )
+run seed file
+run server
